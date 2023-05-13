@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="pengmas_category">
+            <field name="name">Pengmas</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="group_pengmas_masyarakat" model="res.groups">
+            <field name="name">User</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="pengmas_category"/>
+        </record>
+
+        <record id="base.default_user" model="res.users">
+            <field name="groups_id" eval="[(4,ref('pengmas.group_pengmas_masyarakat'))]"/>
+        </record>
+
+        <record id="group_pengmas_petugas" model="res.groups">
+            <field name="name">Petugas</field>
+            <field name="category_id" ref="pengmas_category"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="group_pengmas_admin" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="pengmas_category"/>
+            <field name="implied_ids" eval="[(4, ref('group_pengmas_petugas'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

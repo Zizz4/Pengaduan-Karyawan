@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="tanggapan_form_view" model="ir.ui.view">
+            <field name="name">pengmas.tanggapan.form</field>
+            <field name="model">pengmas.tanggapan</field>
+            <field name="arch" type="xml">
+                <form string="Pengmas Form">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Judul" nolabel="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="id_petugas"/>
+                                <field name="tgl_tanggapan" widget="date"/>
+                            </group>
+                            <group>
+                                <field name="id_pengaduan" invisible="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <notebook>
+                                <page string="TANGGAPAN">
+                                    <field name="tanggapan"/>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tanggapan_tree_view" model="ir.ui.view">
+            <field name="name">pengmas.tanggapan.tree</field>
+            <field name="model">pengmas.tanggapan</field>
+            <field name="arch" type="xml">
+                <tree string="Pengmas">
+                    <field name="name"/>
+                    <field name="tgl_tanggapan" optional="show"/>
+                    <field name="id_petugas" optional="show"/>
+                    <field name="id_pengaduan"/>
+                    <field name="tanggapan"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="tanggapan_search_view" model="ir.ui.view">
+            <field name="name">pengmas.tanggapan.search</field>
+            <field name="model">pengmas.tanggapan</field>
+            <field name="arch" type="xml">
+                <search string="ModelTitle">
+                    <group expand="1" string="Group By">
+                        <filter string="Petugas" name="id_petugas"
+                                context="{'group_by':'id_petugas'}"/>
+                        <filter string="Tanggal Tanggapan" name="tgl_tanggapan"
+                                context="{'group_by':'tgl_tanggapan'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_tanggapan" model="ir.actions.act_window">
+            <field name="name">Tanggapan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pengmas.tanggapan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Belum Ada Tanggapan!
+                </p>
+            </field>
+        </record>
+
+<!--        <menuitem-->
+<!--                id="pengmas_tanggapan"-->
+<!--                name="Tanggapan"-->
+<!--                parent="pengmas.pengmas_perihal_root"-->
+<!--                action="action_tanggapan"-->
+<!--                sequence="20"/>-->
+
+    </data>
+</odoo>

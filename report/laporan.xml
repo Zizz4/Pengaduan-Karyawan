@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_laporan_pengaduan">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <table class="table table-sm o_main_table">
+                            <!-- In case we want to repeat the header, remove "display: table-row-group" -->
+                            <thead style="display: table-row-group">
+                                <tr>
+                                    <th name="th_bulan" class="text-center">Bulan</th>
+                                    <th name="th_proses" class="text-center">Diproses</th>
+                                    <th name="th_selesai" class="text-center">Selesai</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <span t-field="o.bulan"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.jumlah_data_proses"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="o.jumlah_data_selesai"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <record id="action_report_laporan_pengaduan" model="ir.actions.report">
+        <field name="name">Laporan Pengaduan</field>
+        <field name="model">pengmas.pengaduan</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">pengmas.report_laporan_pengaduan</field>
+        <field name="report_file">pengmas.report_laporan_pengaduan</field>
+        <field name="print_report_name">'Pengaduan - %s' % (object.name)
+        </field>
+        <field name="binding_model_id" ref="model_pengmas_pengaduan"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

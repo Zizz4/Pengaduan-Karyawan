@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_users_form_simple_modif_form_masyarakat_inherit" model="ir.ui.view">
+            <field name="name">pengmas.masyarakat.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="after">
+                    <field name="nik"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="masyarakat_view_tree" model="ir.ui.view">
+            <field name="name">masyarakat.view.tree</field>
+            <field name="model">pengmas.masyarakat</field>
+            <field name="arch" type="xml">
+                <tree string="masyarakat_tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_laporan_masyarakat" model="ir.actions.act_window">
+            <field name="name">Laporan Masyarakat</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pengmas.masyarakat</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Belum Ada Masyarakat!
+                </p>
+            </field>
+        </record>
+
+        <!-- Menus -->
+        <menuitem
+                id="pengmas_root"
+                name="Pengaduan Masyarakat"
+                sequence="5"/>
+
+        <menuitem
+                id="pengmas_laporan_root"
+                name="Laporan"
+                parent="pengmas_root"
+                groups="pengmas.group_pengmas_admin"
+                sequence="5"/>
+
+        <menuitem
+                id="pengmas_masyarakat"
+                name="Masyarakat"
+                parent="pengmas_laporan_root"
+                action="action_laporan_masyarakat"
+                sequence="5"/>
+    </data>
+</odoo>

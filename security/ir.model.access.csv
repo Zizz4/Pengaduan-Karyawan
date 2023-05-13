@@ -1,0 +1,16 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pengmas_pengaduan,pengmas.pengaduan,model_pengmas_pengaduan,group_pengmas_masyarakat,1,1,1,0
+access_pengmas_pengaduan_petugas,pengmas.pengaduan.petugas,model_pengmas_pengaduan,group_pengmas_petugas,1,0,0,1
+access_pengmas_pengaduan_admin,pengmas.pengaduan.admin,model_pengmas_pengaduan,group_pengmas_admin,1,0,0,1
+access_pengmas_pengaduan_petugas_validasi,pengmas.pengaduan.petugas.validasi,model_pengmas_pengaduan,group_pengmas_petugas,1,1,0,1
+access_pengmas_pengaduan_admin_validasi,pengmas.pengaduan.admin.validasi,model_pengmas_pengaduan,group_pengmas_admin,1,1,0,1
+
+
+access_pengmas_tanggapan,pengmas.tanggapan,model_pengmas_tanggapan,group_pengmas_masyarakat,1,0,0,0
+access_pengmas_tanggapan_petugas,pengmas.tanggapan.petugas,model_pengmas_tanggapan,group_pengmas_petugas,1,1,1,1
+access_pengmas_tanggapan_admin,pengmas.tanggapan.admin,model_pengmas_tanggapan,group_pengmas_admin,1,1,1,1
+
+access_pengmas_res_users_masyarakat,pengmas.masyarakat,model_res_users,group_pengmas_masyarakat,0,1,0,0
+
+access_jumlah_data,jumlah.data,model_jumlah_data,group_pengmas_masyarakat,0,1,1,0
+access_jumlah_data_admin,jumlah.data.admin,model_jumlah_data,group_pengmas_admin,1,0,0,0

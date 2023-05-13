@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="total_data_tree_view" model="ir.ui.view">
+            <field name="name">jumlah.data.tree</field>
+            <field name="model">jumlah.data</field>
+            <field name="arch" type="xml">
+                <tree string="Data Pengaduan">
+                    <field name="pengaduan_id"/>
+                    <field name="tanggal"/>
+                    <field name="bulan"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_total_data" model="ir.actions.act_window">
+            <field name="name">Rekapitulasi Pengaduan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">jumlah.data</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Gaada Data!
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Total Pengaduan"
+                  id="total_pengaduan_menu"
+                  parent="pengmas.pengmas_root"
+                  action="action_total_data"
+                  groups="pengmas.group_pengmas_admin"
+                  sequence="30"
+        />
+
+
+    </data>
+</odoo>

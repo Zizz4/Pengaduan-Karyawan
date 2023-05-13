@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="pengaduan_admin_form_view" model="ir.ui.view">
+            <field name="name">pengmas.pengaduan.admin.form</field>
+            <field name="model">pengmas.pengaduan</field>
+            <field name="arch" type="xml">
+                <form string="Form Pengaduan">
+                    <header>
+                        <field name="group_pengmas_masyarakat" invisible="1"/>
+                        <field name="group_pengmas_petugas" invisible="1"/>
+                        <field name="group_pengmas_admin" invisible="1"/>
+
+                        <button name="kirim_pengaduan" string="Kirim Pengaduan"
+                                type="object" class="oe_highlight" data-hotkey="q"
+                                groups="pengmas.group_pengmas_masyarakat"
+                                attrs="{'invisible' : [('state', '!=', '0')]}"
+                        />
+                        <button name="validasi_pengaduan" string="Validasi"
+                                type="object" class="btn-primary" data-hotkey="q"
+                                groups="pengmas.group_pengmas_petugas"
+                                attrs="{'invisible' : [('state', '!=', 'proses')]}"
+                        />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <field name="state" invisible="1"/>
+                            <button name="tanggapan_action"
+                                    string="Tanggapan"
+                                    class="oe_stat_button"
+                                    icon="fa-file-text-o"
+                                    type="object"
+                                    attrs="{'invisible' : ['|', ('state', '=', '0'), ('group_pengmas_masyarakat', '=', True)]}"
+                            >
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Judul" nolabel="1"
+                                       attrs="{'readonly': [('state', '!=', '0')]}"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="user_id" widget="many2one_avatar_user" readonly="1"
+                                       attrs="{'readonly' : [('state', '!=', '0')], 'invisible': [('state','=','0')]}"/>
+                                <field name="nik"
+                                       attrs="{'readonly' : [('state', '!=', '0')], 'invisible': [('state','=','0')]}"/>
+                                <field name="tanggal" widget="date"
+                                       attrs="{'readonly' : [('state', '!=', '0')], 'invisible': [('state','=','0')]}"/>
+                            </group>
+                            <group>
+                                <field name="foto" widget="image" nolabel="1"
+                                       attrs="{'readonly': [('state', '!=', '0')]}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="isi_laporan" attrs="{'readonly': [('state', '!=', '0')]}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pengaduan_admin_tree_view" model="ir.ui.view">
+            <field name="name">pengmas.pengaduan.admin.tree</field>
+            <field name="model">pengmas.pengaduan</field>
+            <field name="arch" type="xml">
+                <tree string="List Pengaduan">
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="nik" optional="show"/>
+                    <field name="tanggal"/>
+                    <field name="isi_laporan" optional="show"/>
+                    <field name="state" decoration-success="state == 'selesai'"
+                           decoration-info="state == '0' or state == 'proses'" widget="badge" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="pengaduan_admin_search_view" model="ir.ui.view">
+            <field name="name">pengmas.pengaduan_admin.search</field>
+            <field name="model">pengmas.pengaduan</field>
+            <field name="arch" type="xml">
+                <search string="Pengaduan">
+                    <group expand="1" string="Group By">
+                        <filter string="NIK" name="nik"
+                                context="{'group_by':'nik'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_pengaduan_admin" model="ir.actions.act_window">
+            <field name="name">Pengaduan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">pengmas.pengaduan</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[
+                ('state', 'in', ['proses', 'selesai'])]
+            </field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Belum Ada Laporan!
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Pengaduan Admin"
+                  id="pengaduan_admin_menu"
+                  parent="pengmas.pengmas_root"
+                  action="action_pengaduan_admin"
+                  groups="pengmas.group_pengmas_admin"
+                  sequence="20"
+        />
+
+    </data>
+</odoo>
